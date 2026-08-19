@@ -1,0 +1,19 @@
+.hero-section {
+  padding: 4rem 1rem;
+}
+
+.hero-section__eyebrow,
+.hero-section__intro,
+.hero-section__title {
+  margin: 0;
+}
+
+.hero-section__title {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  line-height: 1;
+  margin-block: 0.75rem;
+}
+
+.hero-section__intro {
+  max-width: 56rem;
+}

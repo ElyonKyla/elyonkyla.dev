@@ -1,0 +1,28 @@
+.language-switcher {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.25rem;
+}
+
+.language-switcher__button {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  padding: 0.25rem 0.375rem;
+}
+
+.language-switcher__button--active {
+  border-color: currentColor;
+}
+
+.language-switcher__button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.language-switcher__separator {
+  opacity: 0.7;
+}

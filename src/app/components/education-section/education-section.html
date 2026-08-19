@@ -1,0 +1,17 @@
+<section class="education-section" id="education" aria-labelledby="education-title">
+  <h2 id="education-title">{{ content().sectionTitles.education }}</h2>
+
+  @if (education.length > 0) {
+    <div class="education-section__list">
+      @for (item of education; track item.title) {
+        <article class="education-section__item">
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.institution }}</p>
+          @if (item.period) {
+            <p>{{ item.period }}</p>
+          }
+        </article>
+      }
+    </div>
+  }
+</section>

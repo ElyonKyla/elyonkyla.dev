@@ -1,0 +1,23 @@
+<div class="language-switcher" [attr.aria-label]="content().languageSwitcher.label" role="group">
+  <button
+    type="button"
+    class="language-switcher__button"
+    [class.language-switcher__button--active]="currentLanguage() === 'en'"
+    [attr.aria-label]="content().languageSwitcher.switchToEnglish"
+    [attr.aria-pressed]="currentLanguage() === 'en'"
+    (click)="setLanguage('en')"
+  >
+    EN
+  </button>
+  <span class="language-switcher__separator" aria-hidden="true">|</span>
+  <button
+    type="button"
+    class="language-switcher__button"
+    [class.language-switcher__button--active]="currentLanguage() === 'es'"
+    [attr.aria-label]="content().languageSwitcher.switchToSpanish"
+    [attr.aria-pressed]="currentLanguage() === 'es'"
+    (click)="setLanguage('es')"
+  >
+    ES
+  </button>
+</div>

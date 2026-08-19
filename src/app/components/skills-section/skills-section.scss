@@ -1,0 +1,9 @@
+.skills-section {
+  padding: 3rem 1rem;
+}
+
+.skills-section__grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}

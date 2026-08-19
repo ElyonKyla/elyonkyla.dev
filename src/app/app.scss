@@ -1,0 +1,27 @@
+.skip-link {
+  background: #ffffff;
+  color: #111827;
+  left: 1rem;
+  padding: 0.5rem 0.75rem;
+  position: fixed;
+  top: 1rem;
+  transform: translateY(-150%);
+  z-index: 10;
+}
+
+.skip-link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+  transform: translateY(0);
+}
+
+.app-main,
+.app-footer {
+  margin-inline: auto;
+  max-width: 72rem;
+  width: 100%;
+}
+
+.app-main:focus-visible {
+  outline: none;
+}

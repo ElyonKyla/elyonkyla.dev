@@ -1,0 +1,16 @@
+<section class="experience-section" id="experience" aria-labelledby="experience-title">
+  <h2 id="experience-title">{{ content().sectionTitles.experience }}</h2>
+
+  @if (experience.length > 0) {
+    <div class="experience-section__list">
+      @for (item of experience; track item.title) {
+        <article class="experience-section__item">
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.organization }}</p>
+          <p>{{ item.period }}</p>
+          <p>{{ item.description }}</p>
+        </article>
+      }
+    </div>
+  }
+</section>

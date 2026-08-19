@@ -1,0 +1,35 @@
+.contact-section {
+  padding: 3rem 1rem;
+}
+
+.contact-section p {
+  max-width: 56rem;
+}
+
+.contact-section__links {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.contact-section__icon-link,
+.contact-section__email-link {
+  color: inherit;
+}
+
+.contact-section__icon-link {
+  align-items: center;
+  display: inline-flex;
+}
+
+.contact-section__email-link {
+  text-decoration: underline;
+}
+
+.contact-section__icon-link:focus-visible,
+.contact-section__email-link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}

@@ -1,0 +1,13 @@
+<header class="site-header">
+  <a class="site-header__brand" href="#home" [attr.aria-label]="content().name">
+    {{ content().name }}
+  </a>
+
+  <nav class="site-header__nav" [attr.aria-label]="content().navigationLabel">
+    @for (item of content().navigation; track item.id) {
+      <a class="site-header__link" [href]="'#' + item.id">{{ item.label }}</a>
+    }
+  </nav>
+
+  <app-language-switcher />
+</header>

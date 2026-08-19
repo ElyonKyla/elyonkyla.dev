@@ -1,0 +1,18 @@
+<section class="skills-section" id="skills" aria-labelledby="skills-title">
+  <h2 id="skills-title">{{ content().sectionTitles.skills }}</h2>
+
+  @if (skillGroups.length > 0) {
+    <div class="skills-section__grid">
+      @for (group of skillGroups; track group.title) {
+        <article class="skills-section__group">
+          <h3>{{ group.title }}</h3>
+          <ul>
+            @for (skill of group.skills; track skill) {
+              <li>{{ skill }}</li>
+            }
+          </ul>
+        </article>
+      }
+    </div>
+  }
+</section>
