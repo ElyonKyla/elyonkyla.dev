@@ -1,8 +1,18 @@
 .education-section {
-  padding: 3rem 1rem;
+  display: block;
 }
 
 .education-section__list {
   display: grid;
   gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+}
+
+.education-section__item h3 {
+  color: var(--color-cyan);
+  margin-block-end: 0.65rem;
+}
+
+.education-section__item p:last-child {
+  margin-block-end: 0;
 }

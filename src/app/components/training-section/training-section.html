@@ -1,13 +1,13 @@
-<section class="training-section" id="training" aria-labelledby="training-title">
+<section class="training-section section-shell" id="training" aria-labelledby="training-title">
   <h2 id="training-title">{{ content().sectionTitles.training }}</h2>
 
   @if (data().training.length > 0) {
     <div class="training-section__list">
       @for (item of data().training; track item.title) {
-        <article class="training-section__item">
+        <article class="training-section__item glass-panel compact-card">
           <h3>{{ item.title }}</h3>
           <p>{{ item.provider }} · {{ item.period }}</p>
-          <p>{{ item.duration }}</p>
+          <p class="meta-text">{{ item.duration }}</p>
           @if (item.detail) {
             <p>{{ item.detail }}</p>
           }

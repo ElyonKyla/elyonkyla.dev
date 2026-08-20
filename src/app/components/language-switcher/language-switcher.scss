@@ -1,5 +1,6 @@
 .language-switcher {
   align-items: center;
+  color: var(--color-text-muted);
   display: inline-flex;
   gap: 0.25rem;
 }
@@ -7,19 +8,27 @@
 .language-switcher__button {
   background: transparent;
   border: 1px solid transparent;
-  border-radius: 0.25rem;
+  border-radius: 999px;
   color: inherit;
   cursor: pointer;
   font: inherit;
-  padding: 0.25rem 0.375rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 0.28rem 0.45rem;
 }
 
 .language-switcher__button--active {
-  border-color: currentColor;
+  background: rgba(241, 154, 115, 0.14);
+  border-color: rgba(241, 154, 115, 0.45);
+  color: #ffffff;
+}
+
+.language-switcher__button:hover {
+  color: #ffffff;
 }
 
 .language-switcher__button:focus-visible {
-  outline: 2px solid currentColor;
+  outline: 2px solid var(--color-cyan);
   outline-offset: 3px;
 }
 

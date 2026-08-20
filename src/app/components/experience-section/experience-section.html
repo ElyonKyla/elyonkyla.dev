@@ -1,13 +1,21 @@
-<section class="experience-section" id="experience" aria-labelledby="experience-title">
+<section
+  class="experience-section section-shell"
+  id="experience"
+  aria-labelledby="experience-title"
+>
   <h2 id="experience-title">{{ content().sectionTitles.experience }}</h2>
 
   @if (data().experience.length > 0) {
     <div class="experience-section__list">
       @for (item of data().experience; track item.period + item.organization) {
         <article class="experience-section__item">
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.organization }} · {{ item.period }}</p>
-          <p>{{ item.description }}</p>
+          <div class="experience-section__marker" aria-hidden="true"></div>
+          <div class="experience-section__summary">
+            <h3>{{ item.title }}</h3>
+            <p class="experience-section__organization">{{ item.organization }}</p>
+            <p class="experience-section__period">{{ item.period }}</p>
+          </div>
+          <p class="experience-section__description">{{ item.description }}</p>
         </article>
       }
     </div>

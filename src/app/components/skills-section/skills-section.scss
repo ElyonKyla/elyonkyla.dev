@@ -1,9 +1,21 @@
 .skills-section {
-  padding: 3rem 1rem;
+  display: block;
 }
 
 .skills-section__grid {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+}
+
+.skills-section__group {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(163, 221, 255, 0.11);
+  border-radius: 1rem;
+}
+
+.skills-section__group h3 {
+  color: var(--color-cyan);
+  font-size: 1rem;
+  margin-block-end: 0.8rem;
 }

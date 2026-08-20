@@ -1,18 +1,20 @@
-<section class="skills-section" id="skills" aria-labelledby="skills-title">
-  <h2 id="skills-title">{{ content().sectionTitles.skills }}</h2>
+<section class="skills-section section-shell" id="skills" aria-labelledby="skills-title">
+  <div class="skills-section__card glass-panel section-card">
+    <h2 id="skills-title">{{ content().sectionTitles.skills }}</h2>
 
-  @if (data().skills.length > 0) {
-    <div class="skills-section__grid">
-      @for (group of data().skills; track group.title) {
-        <article class="skills-section__group">
-          <h3>{{ group.title }}</h3>
-          <ul>
-            @for (skill of group.skills; track skill) {
-              <li>{{ skill }}</li>
-            }
-          </ul>
-        </article>
-      }
-    </div>
-  }
+    @if (data().skills.length > 0) {
+      <div class="skills-section__grid">
+        @for (group of data().skills; track group.title) {
+          <article class="skills-section__group compact-card">
+            <h3>{{ group.title }}</h3>
+            <ul class="tag-list">
+              @for (skill of group.skills; track skill) {
+                <li>{{ skill }}</li>
+              }
+            </ul>
+          </article>
+        }
+      </div>
+    }
+  </div>
 </section>

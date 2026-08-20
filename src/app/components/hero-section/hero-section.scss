@@ -1,5 +1,9 @@
 .hero-section {
-  padding: 4rem 1rem;
+  align-items: center;
+  display: grid;
+  min-height: calc(100svh - var(--header-height));
+  padding: clamp(5rem, 12vw, 9rem) 1rem clamp(4rem, 10vw, 7rem);
+  text-align: center;
 }
 
 .hero-section__eyebrow,
@@ -9,11 +13,36 @@
 }
 
 .hero-section__title {
-  font-size: clamp(2.5rem, 8vw, 5rem);
-  line-height: 1;
-  margin-block: 0.75rem;
+  color: #ffffff;
+  font-size: clamp(3.75rem, 12vw, 8.25rem);
+  letter-spacing: -0.075em;
+  line-height: 0.9;
+  margin-block: 1rem 1.2rem;
+  text-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.48);
+}
+
+.hero-section__eyebrow {
+  color: var(--color-cyan);
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .hero-section__intro {
-  max-width: 56rem;
+  color: var(--color-text);
+  font-size: clamp(1.05rem, 2.1vw, 1.35rem);
+  margin-inline: auto;
+  max-width: 58rem;
+  text-wrap: balance;
+}
+
+@media (max-width: 600px) {
+  .hero-section {
+    min-height: auto;
+    padding-top: 4.5rem;
+  }
+
+  .hero-section__eyebrow {
+    font-size: 0.82rem;
+  }
 }

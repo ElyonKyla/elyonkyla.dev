@@ -1,13 +1,13 @@
-<section class="education-section" id="education" aria-labelledby="education-title">
+<section class="education-section section-shell" id="education" aria-labelledby="education-title">
   <h2 id="education-title">{{ content().sectionTitles.education }}</h2>
 
   @if (data().education.length > 0) {
     <div class="education-section__list">
       @for (item of data().education; track item.title) {
-        <article class="education-section__item">
+        <article class="education-section__item glass-panel compact-card">
           <h3>{{ item.title }}</h3>
           <p>{{ item.institution }}</p>
-          <p>{{ item.period }}</p>
+          <p class="meta-text">{{ item.period }}</p>
         </article>
       }
     </div>

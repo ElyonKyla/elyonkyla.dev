@@ -1,8 +1,9 @@
 .contact-section {
-  padding: 3rem 1rem;
+  padding-block-end: 0;
 }
 
 .contact-section p {
+  color: var(--color-text);
   max-width: 56rem;
 }
 
@@ -11,7 +12,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: 1.25rem;
 }
 
 .contact-section__icon-link,
@@ -21,15 +22,40 @@
 
 .contact-section__icon-link {
   align-items: center;
+  background: rgba(79, 216, 255, 0.1);
+  border: 1px solid rgba(79, 216, 255, 0.18);
+  border-radius: 999px;
   display: inline-flex;
+  min-height: 2.75rem;
+  padding: 0.65rem;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease;
 }
 
 .contact-section__email-link {
+  background: rgba(241, 154, 115, 0.14);
+  border: 1px solid rgba(241, 154, 115, 0.34);
+  border-radius: 999px;
+  color: #ffffff;
+  font-weight: 750;
+  min-height: 2.75rem;
+  padding: 0.68rem 1rem;
   text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.45);
+  text-underline-offset: 0.25em;
+}
+
+.contact-section__icon-link:hover,
+.contact-section__email-link:hover {
+  background: rgba(79, 216, 255, 0.18);
+  border-color: rgba(79, 216, 255, 0.4);
+  color: #ffffff;
 }
 
 .contact-section__icon-link:focus-visible,
 .contact-section__email-link:focus-visible {
-  outline: 2px solid currentColor;
+  outline: 2px solid var(--color-cyan);
   outline-offset: 3px;
 }
