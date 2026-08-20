@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { portfolioData } from '../../content/portfolio-content';
 import { LanguageService } from '../../services/language.service';
 
 @Component({
@@ -8,6 +7,8 @@ import { LanguageService } from '../../services/language.service';
   templateUrl: './education-section.html',
 })
 export class EducationSection {
-  protected readonly content = inject(LanguageService).content;
-  protected readonly education = portfolioData.education;
+  private readonly languageService = inject(LanguageService);
+
+  protected readonly content = this.languageService.content;
+  protected readonly data = this.languageService.data;
 }

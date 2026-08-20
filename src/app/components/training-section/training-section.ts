@@ -2,11 +2,11 @@ import { Component, inject } from '@angular/core';
 import { LanguageService } from '../../services/language.service';
 
 @Component({
-  selector: 'app-experience-section',
-  styleUrl: './experience-section.scss',
-  templateUrl: './experience-section.html',
+  selector: 'app-training-section',
+  styleUrl: './training-section.scss',
+  templateUrl: './training-section.html',
 })
-export class ExperienceSection {
+export class TrainingSection {
   private readonly languageService = inject(LanguageService);
 
   protected readonly content = this.languageService.content;

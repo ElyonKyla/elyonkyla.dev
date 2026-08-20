@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
-import { LanguageCode, portfolioContent } from '../content/portfolio-content';
+import { LanguageCode, portfolioContent, portfolioData } from '../content/portfolio-content';
 
 const storageKey = 'portfolio-language';
 
@@ -11,6 +11,7 @@ export class LanguageService {
 
   readonly currentLanguage = this.language.asReadonly();
   readonly content = computed(() => portfolioContent[this.language()]);
+  readonly data = computed(() => portfolioData[this.language()]);
 
   constructor() {
     effect(() => {

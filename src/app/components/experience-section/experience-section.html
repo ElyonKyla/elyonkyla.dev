@@ -1,13 +1,12 @@
 <section class="experience-section" id="experience" aria-labelledby="experience-title">
   <h2 id="experience-title">{{ content().sectionTitles.experience }}</h2>
 
-  @if (experience.length > 0) {
+  @if (data().experience.length > 0) {
     <div class="experience-section__list">
-      @for (item of experience; track item.title) {
+      @for (item of data().experience; track item.period + item.organization) {
         <article class="experience-section__item">
           <h3>{{ item.title }}</h3>
-          <p>{{ item.organization }}</p>
-          <p>{{ item.period }}</p>
+          <p>{{ item.organization }} · {{ item.period }}</p>
           <p>{{ item.description }}</p>
         </article>
       }

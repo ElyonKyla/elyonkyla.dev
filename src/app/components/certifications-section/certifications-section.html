@@ -1,0 +1,14 @@
+<section class="certifications-section" id="certifications" aria-labelledby="certifications-title">
+  <h2 id="certifications-title">{{ content().sectionTitles.certifications }}</h2>
+
+  @if (data().certifications.length > 0) {
+    <div class="certifications-section__list">
+      @for (certification of data().certifications; track certification.title) {
+        <article class="certifications-section__item">
+          <h3>{{ certification.title }}</h3>
+          <p>{{ certification.description }}</p>
+        </article>
+      }
+    </div>
+  }
+</section>
