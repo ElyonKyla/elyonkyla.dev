@@ -1,59 +1,109 @@
-# ElyonkylaDev
+# Tania Veiga — Developer Portfolio
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.5.
+Personal portfolio built with **Angular** to showcase my professional experience, technical background, projects and education as a software developer.
 
-## Development server
+🌐 **Live site:** [taniaveiga-dev.netlify.app](https://taniaveiga-dev.netlify.app/)
 
-To start a local development server, run:
+## About the project
+
+This project is my personal developer portfolio, designed and developed as a central place to present my professional profile beyond a traditional CV.
+
+The interface combines a clean, modern layout with a glass-style visual design over a fixed city background. The site is fully responsive and supports both **English and Spanish**.
+
+It includes:
+
+* Professional experience presented as a timeline
+* Education and technical training
+* Technologies and development skills
+* Personal and professional projects
+* Direct links to GitHub and LinkedIn
+* Spanish / English language support
+* Responsive design for desktop and mobile devices
+
+## Tech Stack
+
+* **Angular 22**
+* **TypeScript**
+* **HTML5**
+* **CSS**
+* **Angular CLI**
+* **Git & GitHub**
+* **Netlify**
+
+## Design
+
+The portfolio was designed around a dark, technology-oriented visual identity while keeping readability and navigation simple.
+
+Some of the main UI concepts include:
+
+* Fixed full-screen background
+* Translucent glass-style content cards
+* Experience timeline
+* Responsive layouts
+* Reusable Angular components
+* Bilingual content
+* Subtle visual effects and transitions
+
+## Running locally
+
+Clone the repository:
+
+```bash
+git clone https://github.com/ElyonKyla/ElyonkylaDev.git
+cd ElyonkylaDev
+```
+
+Install the dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Then open:
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```text
+http://localhost:4200/
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+The application will automatically reload when source files are modified.
 
-```bash
-ng generate --help
-```
+## Production build
 
-## Building
-
-To build the project run:
+To create a production build:
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+The compiled application will be generated inside the `dist/` directory.
 
-## Running unit tests
+## Deployment
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+The portfolio is deployed using **Netlify**.
 
-```bash
-ng test
-```
+Production version:
 
-## Running end-to-end tests
+🌐 https://taniaveiga-dev.netlify.app/
 
-For end-to-end (e2e) testing, run:
+## Project status
 
-```bash
-ng e2e
-```
+This portfolio is an **actively evolving project**.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+It is continuously updated as I add new projects, technologies, professional experience and improvements to the interface.
 
-## Additional Resources
+## Contact
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+**Tania Veiga**
+
+Backend-focused Software Developer
+
+* [LinkedIn](https://www.linkedin.com/in/tania-veiga-alen/)
+* [GitHub](https://github.com/ElyonKyla)
+* [Portfolio](https://taniaveiga-dev.netlify.app/)
+
