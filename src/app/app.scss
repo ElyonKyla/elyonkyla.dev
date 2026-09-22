@@ -1,8 +1,7 @@
 .city-background {
   background-image:
-    radial-gradient(circle at 50% 42%, rgba(20, 151, 198, 0.22), transparent 34rem),
-    linear-gradient(180deg, rgba(2, 7, 18, 0.48), rgba(2, 7, 18, 0.82)),
-    linear-gradient(90deg, rgba(2, 7, 18, 0.72), rgba(2, 7, 18, 0.28) 50%, rgba(2, 7, 18, 0.72)),
+    radial-gradient(ellipse at 50% 42%, rgba(2, 6, 15, 0.28), transparent 34rem),
+    linear-gradient(90deg, rgba(2, 6, 15, 0.25), rgba(2, 6, 15, 0.2) 24%, rgba(2, 6, 15, 0.2) 76%, rgba(2, 6, 15, 0.25)),
     url('/images/city-background.png');
   background-position: center center;
   background-size: cover;

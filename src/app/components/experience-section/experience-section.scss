@@ -75,8 +75,9 @@
 }
 
 .experience-section__description {
-  color: var(--color-text-muted);
+  color: rgba(226, 238, 245, 0.92);
   max-width: 42rem;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.75);
 }
 
 @keyframes timeline-fade {
