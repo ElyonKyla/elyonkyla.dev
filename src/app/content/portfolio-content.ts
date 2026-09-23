@@ -21,6 +21,7 @@ export interface LinkLabels {
   readonly linkedin: string;
   readonly email: string;
   readonly project: string;
+  readonly liveSite: string;
 }
 
 export interface LanguageSwitcherLabels {
@@ -61,7 +62,8 @@ export interface ProjectItem {
   readonly title: string;
   readonly description: string;
   readonly technologies: readonly string[];
-  readonly url?: string;
+  readonly repositoryUrl?: string;
+  readonly liveUrl?: string;
 }
 
 export interface EducationItem {
@@ -96,8 +98,8 @@ const navigationEn: readonly NavigationItem[] = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About' },
   { id: 'experience', label: 'Experience' },
-  { id: 'skills', label: 'Skills' },
   { id: 'projects', label: 'Projects' },
+  { id: 'skills', label: 'Skills' },
   { id: 'education', label: 'Education' },
   { id: 'training', label: 'Courses' },
   { id: 'certifications', label: 'Certifications' },
@@ -108,8 +110,8 @@ const navigationEs: readonly NavigationItem[] = [
   { id: 'home', label: 'Inicio' },
   { id: 'about', label: 'Sobre mí' },
   { id: 'experience', label: 'Experiencia' },
-  { id: 'skills', label: 'Tecnologías' },
   { id: 'projects', label: 'Proyectos' },
+  { id: 'skills', label: 'Tecnologías' },
   { id: 'education', label: 'Formación' },
   { id: 'training', label: 'Cursos' },
   { id: 'certifications', label: 'Certificaciones' },
@@ -147,6 +149,7 @@ export const portfolioContent: Record<LanguageCode, PortfolioContent> = {
       linkedin: 'LinkedIn profile',
       email: 'Contact by email',
       project: 'View project',
+      liveSite: 'View live site',
     },
     languageSwitcher: {
       label: 'Language selector',
@@ -184,6 +187,7 @@ export const portfolioContent: Record<LanguageCode, PortfolioContent> = {
       linkedin: 'Perfil de LinkedIn',
       email: 'Contactar por email',
       project: 'Ver proyecto',
+      liveSite: 'Visitar web',
     },
     languageSwitcher: {
       label: 'Selector de idioma',
@@ -269,6 +273,13 @@ export const portfolioData: Record<LanguageCode, PortfolioData> = {
     ],
     projects: [
       {
+        title: 'Taller & Cars Listanco',
+        description:
+          'Corporate website and vehicle catalogue developed and deployed for Taller & Cars Listanco. It includes individual vehicle pages, stock filtering, a private inventory panel powered by Directus, responsive design, local SEO, and deployment on Netlify and Railway.',
+        technologies: ['Angular', 'TypeScript', 'Directus', 'Netlify', 'Railway'],
+        liveUrl: 'https://tallercarslistanco.es/',
+      },
+      {
         title: 'Digital Tachograph Data Processing',
         description:
           'Java backend solution for processing digital tachograph and driver card data under European regulatory requirements, including structured XML generation and functional and integration testing.',
@@ -279,7 +290,7 @@ export const portfolioData: Record<LanguageCode, PortfolioData> = {
         description:
           'Flask web application for user administration, with CRUD operations, JSON persistence and Jinja2 templates.',
         technologies: ['Python', 'Flask', 'Jinja2', 'JSON'],
-        url: 'https://github.com/ElyonKyla/Python_Admin_Web',
+        repositoryUrl: 'https://github.com/ElyonKyla/Python_Admin_Web',
       },
     ],
     education: [
@@ -405,6 +416,13 @@ export const portfolioData: Record<LanguageCode, PortfolioData> = {
     ],
     projects: [
       {
+        title: 'Taller & Cars Listanco',
+        description:
+          'Sitio web corporativo y catálogo de vehículos desarrollado y puesto en producción para Taller & Cars Listanco. Incluye fichas individuales de vehículos, filtrado de stock, un panel privado de inventario con Directus, diseño responsive, SEO local y despliegue en Netlify y Railway.',
+        technologies: ['Angular', 'TypeScript', 'Directus', 'Netlify', 'Railway'],
+        liveUrl: 'https://tallercarslistanco.es/',
+      },
+      {
         title: 'Procesamiento de datos de tacógrafos digitales',
         description:
           'Solución backend en Java para procesar datos de tacógrafos digitales y tarjetas de conductor conforme a requisitos regulatorios europeos, incluyendo generación estructurada de XML y pruebas funcionales y de integración.',
@@ -415,7 +433,7 @@ export const portfolioData: Record<LanguageCode, PortfolioData> = {
         description:
           'Aplicación web Flask para la administración de usuarios, con operaciones CRUD, persistencia JSON y plantillas Jinja2.',
         technologies: ['Python', 'Flask', 'Jinja2', 'JSON'],
-        url: 'https://github.com/ElyonKyla/Python_Admin_Web',
+        repositoryUrl: 'https://github.com/ElyonKyla/Python_Admin_Web',
       },
     ],
     education: [
