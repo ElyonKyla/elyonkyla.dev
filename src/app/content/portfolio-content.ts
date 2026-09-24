@@ -20,7 +20,7 @@ export interface LinkLabels {
   readonly github: string;
   readonly linkedin: string;
   readonly email: string;
-  readonly project: string;
+  readonly repository: string;
   readonly liveSite: string;
 }
 
@@ -40,6 +40,7 @@ export interface PortfolioContent {
   readonly intro: string;
   readonly about: string;
   readonly contact: string;
+  readonly projectsIntro: string;
   readonly navigation: readonly NavigationItem[];
   readonly sectionTitles: Record<SectionId, string>;
   readonly links: LinkLabels;
@@ -59,9 +60,17 @@ export interface SkillGroup {
 }
 
 export interface ProjectItem {
+  readonly number: string;
+  readonly category: string;
   readonly title: string;
+  readonly role: string;
   readonly description: string;
   readonly technologies: readonly string[];
+  readonly visual: 'screenshot' | 'data-flow' | 'admin';
+  readonly visualLabel: string;
+  readonly additionalTechnologyLabel?: string;
+  readonly imageSrc?: string;
+  readonly displayUrl?: string;
   readonly repositoryUrl?: string;
   readonly liveUrl?: string;
 }
@@ -132,13 +141,14 @@ export const portfolioContent: Record<LanguageCode, PortfolioContent> = {
       'I am a backend developer with a multidisciplinary technical background spanning software development, systems and infrastructure. I have worked on enterprise applications, data processing and international projects, both independently and alongside other teams.',
     contact:
       'Let’s talk. I’m interested in backend development opportunities, particularly involving Java, Python and AWS.',
+    projectsIntro: 'Web and backend solutions developed for real clients and personal projects.',
     navigation: navigationEn,
     sectionTitles: {
       home: 'Home',
       about: 'About',
       experience: 'Experience',
       skills: 'Skills',
-      projects: 'Projects',
+      projects: 'Featured projects',
       education: 'Education',
       training: 'Courses & Specialized Training',
       certifications: 'Certifications',
@@ -148,7 +158,7 @@ export const portfolioContent: Record<LanguageCode, PortfolioContent> = {
       github: 'GitHub profile',
       linkedin: 'LinkedIn profile',
       email: 'Contact by email',
-      project: 'View project',
+      repository: 'GitHub',
       liveSite: 'View live site',
     },
     languageSwitcher: {
@@ -170,13 +180,15 @@ export const portfolioContent: Record<LanguageCode, PortfolioContent> = {
       'Soy desarrolladora backend con una trayectoria técnica multidisciplinar que combina desarrollo de software, sistemas e infraestructura. He trabajado con aplicaciones empresariales, procesamiento de datos y proyectos internacionales, desenvolviéndome tanto de forma autónoma como en colaboración con otros equipos.',
     contact:
       '¿Hablamos? Estoy interesada en oportunidades de desarrollo backend, especialmente con Java, Python y AWS.',
+    projectsIntro:
+      'Soluciones web y backend desarrolladas para clientes reales y proyectos personales.',
     navigation: navigationEs,
     sectionTitles: {
       home: 'Inicio',
       about: 'Sobre mí',
       experience: 'Experiencia',
       skills: 'Tecnologías',
-      projects: 'Proyectos',
+      projects: 'Proyectos destacados',
       education: 'Formación',
       training: 'Cursos y formación especializada',
       certifications: 'Certificaciones',
@@ -186,7 +198,7 @@ export const portfolioContent: Record<LanguageCode, PortfolioContent> = {
       github: 'Perfil de GitHub',
       linkedin: 'Perfil de LinkedIn',
       email: 'Contactar por email',
-      project: 'Ver proyecto',
+      repository: 'GitHub',
       liveSite: 'Visitar web',
     },
     languageSwitcher: {
@@ -273,23 +285,41 @@ export const portfolioData: Record<LanguageCode, PortfolioData> = {
     ],
     projects: [
       {
+        number: '01',
+        category: 'CLIENT PROJECT',
         title: 'Taller & Cars Listanco',
+        role: 'Full-Stack Developer & Web Architect',
         description:
           'Corporate website and vehicle catalogue developed and deployed for Taller & Cars Listanco. It includes individual vehicle pages, stock filtering, a private inventory panel powered by Directus, responsive design, local SEO, and deployment on Netlify and Railway.',
         technologies: ['Angular', 'TypeScript', 'Directus', 'Netlify', 'Railway'],
+        visual: 'screenshot',
+        visualLabel: 'Taller & Cars Listanco homepage',
+        additionalTechnologyLabel: '1 additional technology: Railway',
+        imageSrc: '/images/projects/taller-cars-listanco.webp',
+        displayUrl: 'tallercarslistanco.es',
         liveUrl: 'https://tallercarslistanco.es/',
       },
       {
+        number: '02',
+        category: 'BACKEND & DATA',
         title: 'Digital Tachograph Data Processing',
+        role: 'Backend Developer',
         description:
           'Java backend solution for processing digital tachograph and driver card data under European regulatory requirements, including structured XML generation and functional and integration testing.',
         technologies: ['Java', 'XML'],
+        visual: 'data-flow',
+        visualLabel: 'Abstract Java and XML data flow illustration',
       },
       {
+        number: '03',
+        category: 'PERSONAL PROJECT',
         title: 'Python Admin Web',
+        role: 'Python Developer',
         description:
           'Flask web application for user administration, with CRUD operations, JSON persistence and Jinja2 templates.',
         technologies: ['Python', 'Flask', 'Jinja2', 'JSON'],
+        visual: 'admin',
+        visualLabel: 'Stylized administrative panel illustration',
         repositoryUrl: 'https://github.com/ElyonKyla/Python_Admin_Web',
       },
     ],
@@ -416,23 +446,41 @@ export const portfolioData: Record<LanguageCode, PortfolioData> = {
     ],
     projects: [
       {
+        number: '01',
+        category: 'PROYECTO PARA CLIENTE',
         title: 'Taller & Cars Listanco',
+        role: 'Desarrolladora Full-Stack y Arquitecta Web',
         description:
           'Sitio web corporativo y catálogo de vehículos desarrollado y puesto en producción para Taller & Cars Listanco. Incluye fichas individuales de vehículos, filtrado de stock, un panel privado de inventario con Directus, diseño responsive, SEO local y despliegue en Netlify y Railway.',
         technologies: ['Angular', 'TypeScript', 'Directus', 'Netlify', 'Railway'],
+        visual: 'screenshot',
+        visualLabel: 'Portada de Taller & Cars Listanco',
+        additionalTechnologyLabel: '1 tecnología adicional: Railway',
+        imageSrc: '/images/projects/taller-cars-listanco.webp',
+        displayUrl: 'tallercarslistanco.es',
         liveUrl: 'https://tallercarslistanco.es/',
       },
       {
+        number: '02',
+        category: 'BACKEND Y DATOS',
         title: 'Procesamiento de datos de tacógrafos digitales',
+        role: 'Desarrolladora Backend',
         description:
           'Solución backend en Java para procesar datos de tacógrafos digitales y tarjetas de conductor conforme a requisitos regulatorios europeos, incluyendo generación estructurada de XML y pruebas funcionales y de integración.',
         technologies: ['Java', 'XML'],
+        visual: 'data-flow',
+        visualLabel: 'Ilustración abstracta del flujo de datos entre Java y XML',
       },
       {
+        number: '03',
+        category: 'PROYECTO PERSONAL',
         title: 'Python Admin Web',
+        role: 'Desarrolladora Python',
         description:
           'Aplicación web Flask para la administración de usuarios, con operaciones CRUD, persistencia JSON y plantillas Jinja2.',
         technologies: ['Python', 'Flask', 'Jinja2', 'JSON'],
+        visual: 'admin',
+        visualLabel: 'Ilustración estilizada de un panel administrativo',
         repositoryUrl: 'https://github.com/ElyonKyla/Python_Admin_Web',
       },
     ],

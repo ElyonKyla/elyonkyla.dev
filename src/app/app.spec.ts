@@ -153,7 +153,7 @@ describe('App', () => {
     expect(certificationsText).not.toContain(unearnedAwsCertification);
   });
 
-  it('should render only the two authorized projects', async () => {
+  it('should render only the three authorized projects', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
@@ -161,11 +161,40 @@ describe('App', () => {
     const projectArticles = projectsSection.querySelectorAll('article');
     const projectsText = projectsSection.textContent ?? '';
 
-    expect(projectArticles.length).toBe(2);
+    expect(projectArticles.length).toBe(3);
+    expect(projectsText).toContain('Taller & Cars Listanco');
     expect(projectsText).toContain('Digital Tachograph Data Processing');
     expect(projectsText).toContain('Python Admin Web');
+    expect(projectsText).toContain('Full-Stack Developer & Web Architect');
+    expect(
+      projectsSection.querySelector('.projects-section__technology-count')?.getAttribute('aria-label'),
+    ).toBe('1 additional technology: Railway');
     expect(projectsText).not.toContain(['Automated PDF', ' Reporting'].join(''));
     expect(projectsText).not.toContain(['Generación automatizada', ' de informes PDF'].join(''));
+
+    const spanishButton = compiled.querySelector(
+      'button[aria-label="Switch to Spanish"]',
+    ) as HTMLButtonElement;
+    spanishButton.click();
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    expect(projectsSection.textContent).toContain('Procesamiento de datos de tacógrafos digitales');
+    expect(projectsSection.textContent).toContain('Desarrolladora Full-Stack y Arquitecta Web');
+    expect(projectsSection.textContent).toContain('Desarrolladora Python');
+    expect(
+      projectsSection.querySelector('.projects-section__technology-count')?.getAttribute('aria-label'),
+    ).toBe('1 tecnología adicional: Railway');
+
+    const englishButton = compiled.querySelector(
+      'button[aria-label="Cambiar a inglés"]',
+    ) as HTMLButtonElement;
+    englishButton.click();
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    expect(projectsSection.textContent).toContain('Taller & Cars Listanco');
+    expect(projectsSection.textContent).toContain('Full-Stack Developer & Web Architect');
   });
 
   it('should render FastAPI in the skills section in both languages', async () => {
