@@ -2,14 +2,58 @@
   padding-block-start: clamp(2rem, 5vw, 4rem);
 }
 
+.about-section__layout {
+  align-items: center;
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3rem);
+  grid-template-columns: minmax(13.5rem, 17rem) minmax(0, 1fr);
+}
+
+.about-section__portrait {
+  background: linear-gradient(145deg, rgba(79, 216, 255, 0.14), rgba(6, 21, 37, 0.5));
+  border: 1px solid rgba(79, 216, 255, 0.34);
+  border-radius: 1.25rem;
+  box-shadow: 0 1.15rem 2.8rem rgba(0, 0, 0, 0.3);
+  margin: 0;
+  overflow: hidden;
+  padding: 0.4rem;
+}
+
+.about-section__portrait img {
+  aspect-ratio: 3 / 4;
+  border-radius: 0.9rem;
+  display: block;
+  height: auto;
+  object-fit: cover;
+  object-position: 50% 42%;
+  width: 100%;
+}
+
 .about-section__copy {
   display: grid;
   gap: 1rem;
-  max-width: 56rem;
 }
 
 .about-section__copy p {
   color: var(--color-text);
   font-size: clamp(1.05rem, 2vw, 1.22rem);
   margin: 0;
+}
+
+@supports (backdrop-filter: blur(0.75rem)) {
+  .about-section__portrait {
+    backdrop-filter: blur(0.75rem);
+  }
+}
+
+@media (max-width: 760px) {
+  .about-section__layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .about-section__portrait {
+    justify-self: center;
+    max-width: min(72vw, 16rem);
+    width: 100%;
+  }
 }

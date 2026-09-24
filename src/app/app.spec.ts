@@ -72,14 +72,23 @@ describe('App', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const hero = compiled.querySelector('section#home') as HTMLElement;
     const about = compiled.querySelector('section#about') as HTMLElement;
+    const portrait = about.querySelector('img') as HTMLImageElement;
 
     expect(hero.textContent).toContain('Backend Developer · Java · Python · AWS');
     expect(hero.textContent).toContain(
-      "I'm a backend developer with experience in enterprise applications, databases, data integration and processing.",
+      'Backend developer with experience in enterprise applications, databases, data integration and processing.',
     );
     expect(about.querySelectorAll('p').length).toBe(3);
-    expect(about.textContent).toContain("I'm Tania, a backend developer and a naturally curious person.");
+    expect(about.textContent).toContain(
+      "I'm Tania, a backend developer and a naturally curious person.",
+    );
     expect(about.textContent).toContain('Hanzo and Nami');
+    expect(portrait.getAttribute('src')).toBe('/images/tania-about.webp');
+    expect(portrait.getAttribute('alt')).toBe('Portrait of Tania Veiga');
+    expect(portrait.getAttribute('width')).toBe('720');
+    expect(portrait.getAttribute('height')).toBe('960');
+    expect(portrait.getAttribute('loading')).toBe('lazy');
+    expect(portrait.getAttribute('decoding')).toBe('async');
 
     const spanishButton = compiled.querySelector(
       'button[aria-label="Switch to Spanish"]',
@@ -90,11 +99,12 @@ describe('App', () => {
 
     expect(hero.textContent).toContain('Backend Developer · Java · Python · AWS');
     expect(hero.textContent).toContain(
-      'Soy desarrolladora backend con experiencia en aplicaciones empresariales, bases de datos e integración y procesamiento de datos.',
+      'Desarrolladora backend con experiencia en aplicaciones empresariales, bases de datos e integración y procesamiento de datos.',
     );
     expect(about.querySelectorAll('p').length).toBe(3);
     expect(about.textContent).toContain('Soy Tania, desarrolladora backend');
     expect(about.textContent).toContain('Hanzo y Nami');
+    expect(portrait.getAttribute('alt')).toBe('Retrato de Tania Veiga');
   });
 
   it('should render validated professional experience', async () => {

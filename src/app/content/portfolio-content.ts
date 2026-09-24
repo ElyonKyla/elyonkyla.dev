@@ -53,6 +53,7 @@ export interface PortfolioContent {
   readonly role: string;
   readonly intro: string;
   readonly about: readonly string[];
+  readonly aboutImageAlt: string;
   readonly contact: string;
   readonly projectsIntro: string;
   readonly navigation: readonly NavigationItem[];
@@ -153,12 +154,13 @@ export const portfolioContent: Record<LanguageCode, PortfolioContent> = {
     name: 'Tania Veiga',
     role: 'Backend Developer · Java · Python · AWS',
     intro:
-      "I'm a backend developer with experience in enterprise applications, databases, data integration and processing. I've worked on national and international projects and continue to expand my skills with Python, AWS and new backend technologies.",
+      "Backend developer with experience in enterprise applications, databases, data integration and processing. I've worked on national and international projects and continue to expand my skills with Python, AWS and new backend technologies.",
     about: [
       "I'm Tania, a backend developer and a naturally curious person. I enjoy understanding how things work, solving problems and continuing to learn, both at work and beyond.",
       "I began my professional career working across systems and software development, and over time I found my place in backend development. I particularly enjoy working with logic and data, and building solutions that make sense beyond the code itself.",
       "Away from the keyboard, I enjoy reading, cooking and trying new things. I also live with two cats, Hanzo and Nami, who firmly believe that every desk belongs to them. I'm currently combining my professional development with a degree in Computer Engineering while continuing to learn about backend and cloud technologies.",
     ],
+    aboutImageAlt: 'Portrait of Tania Veiga',
     contact:
       'Let’s talk. I’m interested in backend development opportunities, particularly involving Java, Python and AWS.',
     projectsIntro: 'Web and backend solutions developed for real clients and personal projects.',
@@ -208,12 +210,13 @@ export const portfolioContent: Record<LanguageCode, PortfolioContent> = {
     name: 'Tania Veiga',
     role: 'Backend Developer · Java · Python · AWS',
     intro:
-      'Soy desarrolladora backend con experiencia en aplicaciones empresariales, bases de datos e integración y procesamiento de datos. He trabajado en proyectos nacionales e internacionales y continúo ampliando mi perfil con Python, AWS y nuevas tecnologías backend.',
+      'Desarrolladora backend con experiencia en aplicaciones empresariales, bases de datos e integración y procesamiento de datos. He trabajado en proyectos nacionales e internacionales y continúo ampliando mi perfil con Python, AWS y nuevas tecnologías backend.',
     about: [
       'Soy Tania, desarrolladora backend y una persona bastante curiosa por naturaleza. Me gusta entender cómo funcionan las cosas, resolver problemas y seguir aprendiendo, tanto dentro como fuera del trabajo.',
       'Empecé mi trayectoria profesional entre sistemas y desarrollo, y con los años fui encontrando mi sitio en el backend, donde disfruto especialmente trabajando con lógica, datos y construyendo soluciones que tengan sentido más allá del código.',
       'Fuera del teclado, me gusta leer, cocinar y probar cosas nuevas. También convivo con dos gatos, Hanzo y Nami, que tienen bastante claro que cualquier escritorio les pertenece. Actualmente compagino mi desarrollo profesional con el Grado en Ingeniería Informática y continúo aprendiendo sobre backend y cloud.',
     ],
+    aboutImageAlt: 'Retrato de Tania Veiga',
     contact:
       '¿Hablamos? Estoy interesada en oportunidades de desarrollo backend, especialmente con Java, Python y AWS.',
     projectsIntro:
