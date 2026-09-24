@@ -9,12 +9,36 @@
     </a>
   }
 
-  <nav class="site-header__nav" [attr.aria-label]="content().navigationLabel">
+  <button
+    type="button"
+    class="site-header__menu-toggle"
+    [attr.aria-controls]="'site-navigation'"
+    [attr.aria-expanded]="isMenuOpen()"
+    [attr.aria-label]="
+      isMenuOpen() ? content().closeNavigationLabel : content().openNavigationLabel
+    "
+    (click)="toggleMenu()"
+  >
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+  </button>
+
+  <nav
+    id="site-navigation"
+    class="site-header__nav"
+    [class.site-header__nav--open]="isMenuOpen()"
+    [attr.aria-label]="content().navigationLabel"
+  >
     @for (item of content().navigation; track item.id) {
       @if (isCaseStudy()) {
-        <a class="site-header__link" routerLink="/" [fragment]="item.id">{{ item.label }}</a>
+        <a class="site-header__link" routerLink="/" [fragment]="item.id" (click)="closeMenu()">
+          {{ item.label }}
+        </a>
       } @else {
-        <a class="site-header__link" [href]="'#' + item.id">{{ item.label }}</a>
+        <a class="site-header__link" [href]="'#' + item.id" (click)="closeMenu()">
+          {{ item.label }}
+        </a>
       }
     }
   </nav>

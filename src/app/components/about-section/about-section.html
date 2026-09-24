@@ -1,6 +1,10 @@
 <section class="about-section section-shell" id="about" aria-labelledby="about-title">
   <div class="about-section__card glass-panel section-card">
     <h2 id="about-title">{{ content().sectionTitles.about }}</h2>
-    <p>{{ content().about }}</p>
+    <div class="about-section__copy">
+      @for (paragraph of content().about; track $index) {
+        <p>{{ paragraph }}</p>
+      }
+    </div>
   </div>
 </section>

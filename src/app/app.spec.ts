@@ -50,6 +50,51 @@ describe('App', () => {
     expect(compiled.querySelector('section#contact')).toBeTruthy();
     expect(compiled.querySelector('section#training')).toBeTruthy();
     expect(compiled.querySelector('section#certifications')).toBeTruthy();
+
+    const sectionOrder = [
+      ...(compiled.querySelector('.app-main') as HTMLElement).children,
+    ].map((section) => section.tagName.toLowerCase());
+    expect(sectionOrder).toEqual([
+      'app-hero-section',
+      'app-experience-section',
+      'app-projects-section',
+      'app-about-section',
+      'app-skills-section',
+      'app-education-section',
+      'app-training-section',
+      'app-certifications-section',
+    ]);
+  });
+
+  it('should render the updated hero and personal about copy in both languages', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const hero = compiled.querySelector('section#home') as HTMLElement;
+    const about = compiled.querySelector('section#about') as HTMLElement;
+
+    expect(hero.textContent).toContain('Backend Developer · Java · Python · AWS');
+    expect(hero.textContent).toContain(
+      "I'm a backend developer with experience in enterprise applications, databases, data integration and processing.",
+    );
+    expect(about.querySelectorAll('p').length).toBe(3);
+    expect(about.textContent).toContain("I'm Tania, a backend developer and a naturally curious person.");
+    expect(about.textContent).toContain('Hanzo and Nami');
+
+    const spanishButton = compiled.querySelector(
+      'button[aria-label="Switch to Spanish"]',
+    ) as HTMLButtonElement;
+    spanishButton.click();
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    expect(hero.textContent).toContain('Backend Developer · Java · Python · AWS');
+    expect(hero.textContent).toContain(
+      'Soy desarrolladora backend con experiencia en aplicaciones empresariales, bases de datos e integración y procesamiento de datos.',
+    );
+    expect(about.querySelectorAll('p').length).toBe(3);
+    expect(about.textContent).toContain('Soy Tania, desarrolladora backend');
+    expect(about.textContent).toContain('Hanzo y Nami');
   });
 
   it('should render validated professional experience', async () => {
@@ -256,9 +301,9 @@ describe('App', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const sectionIds = [
       'home',
-      'about',
       'experience',
       'projects',
+      'about',
       'skills',
       'education',
       'training',
@@ -295,15 +340,56 @@ describe('App', () => {
 
     expect([...links].map((link) => link.getAttribute('href'))).toEqual([
       '#home',
-      '#about',
       '#experience',
       '#projects',
+      '#about',
       '#skills',
       '#education',
       '#training',
       '#certifications',
       '#contact',
     ]);
+  });
+
+  it('should manage the accessible mobile navigation state', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const toggle = compiled.querySelector('.site-header__menu-toggle') as HTMLButtonElement;
+    const navigation = compiled.querySelector('.site-header__nav') as HTMLElement;
+
+    expect(toggle.getAttribute('aria-expanded')).toBe('false');
+    expect(toggle.getAttribute('aria-label')).toBe('Open menu');
+    expect(navigation.classList.contains('site-header__nav--open')).toBe(false);
+
+    toggle.click();
+    fixture.detectChanges();
+    expect(toggle.getAttribute('aria-expanded')).toBe('true');
+    expect(toggle.getAttribute('aria-label')).toBe('Close menu');
+    expect(navigation.classList.contains('site-header__nav--open')).toBe(true);
+
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    fixture.detectChanges();
+    expect(toggle.getAttribute('aria-expanded')).toBe('false');
+
+    toggle.click();
+    fixture.detectChanges();
+    navigation.querySelector<HTMLAnchorElement>('a')?.click();
+    fixture.detectChanges();
+    expect(toggle.getAttribute('aria-expanded')).toBe('false');
+
+    toggle.click();
+    fixture.detectChanges();
+    window.dispatchEvent(new Event('resize'));
+    fixture.detectChanges();
+    expect(toggle.getAttribute('aria-expanded')).toBe('false');
+
+    const spanishButton = compiled.querySelector(
+      'button[aria-label="Switch to Spanish"]',
+    ) as HTMLButtonElement;
+    spanishButton.click();
+    fixture.detectChanges();
+    expect(toggle.getAttribute('aria-label')).toBe('Abrir menú');
   });
 
   it('should localize case-study metadata and restore landing metadata', async () => {
