@@ -1,0 +1,44 @@
+@switch (project().visual) {
+  @case ('screenshot') {
+    <div class="browser-frame">
+      <div class="browser-frame__bar" aria-hidden="true">
+        <span class="browser-frame__controls"><i></i><i></i><i></i></span>
+        <span class="browser-frame__address">{{ project().displayUrl }}</span>
+      </div>
+      <img
+        class="browser-frame__image"
+        [src]="project().imageSrc ?? ''"
+        [alt]="project().visualLabel"
+        width="1440"
+        height="900"
+      />
+    </div>
+  }
+  @case ('data-flow') {
+    <div
+      class="project-illustration project-illustration--data"
+      role="img"
+      [attr.aria-label]="project().visualLabel"
+    >
+      <div class="data-node" aria-hidden="true">Java</div>
+      <div class="data-stream" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="data-node" aria-hidden="true">XML</div>
+    </div>
+  }
+  @case ('admin') {
+    <div
+      class="project-illustration project-illustration--admin"
+      role="img"
+      [attr.aria-label]="project().visualLabel"
+    >
+      <div class="admin-panel" aria-hidden="true">
+        <div class="admin-panel__rail"><i></i><i></i><i></i><i></i></div>
+        <div class="admin-panel__body">
+          <div class="admin-panel__toolbar"><i></i><i></i></div>
+          <div class="admin-panel__summary"><i></i><i></i><i></i></div>
+          <div class="admin-panel__rows"><i></i><i></i><i></i></div>
+        </div>
+      </div>
+    </div>
+  }
+}

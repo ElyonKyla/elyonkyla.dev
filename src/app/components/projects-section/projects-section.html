@@ -1,119 +1,152 @@
-<section class="projects-section section-shell" id="projects" aria-labelledby="projects-title">
+<section
+  class="projects-section section-shell"
+  id="projects"
+  role="region"
+  [attr.aria-label]="content().projectCarousel.regionLabel"
+  [attr.aria-roledescription]="content().projectCarousel.carouselDescription"
+  tabindex="0"
+  (keydown)="onCarouselKeydown($event)"
+>
   <header class="projects-section__header">
     <h2 id="projects-title">{{ content().sectionTitles.projects }}</h2>
     <p>{{ content().projectsIntro }}</p>
   </header>
 
   @if (data().projects.length > 0) {
-    <div class="projects-section__list">
-      @for (project of data().projects; track project.title; let first = $first) {
-        <article
-          class="projects-section__item glass-panel"
-          [class.projects-section__item--featured]="first"
-        >
-          <div class="projects-section__visual">
-            @switch (project.visual) {
-              @case ('screenshot') {
-                <div class="browser-frame">
-                  <div class="browser-frame__bar" aria-hidden="true">
-                    <span class="browser-frame__controls"><i></i><i></i><i></i></span>
-                    <span class="browser-frame__address">{{ project.displayUrl }}</span>
-                  </div>
-                  <img
-                    class="browser-frame__image"
-                    [src]="project.imageSrc ?? ''"
-                    [alt]="project.visualLabel"
-                    width="1440"
-                    height="900"
-                  />
-                </div>
-              }
-              @case ('data-flow') {
-                <div
-                  class="project-illustration project-illustration--data"
-                  role="img"
-                  [attr.aria-label]="project.visualLabel"
-                >
-                  <div class="data-node data-node--source" aria-hidden="true">Java</div>
-                  <div class="data-stream" aria-hidden="true">
-                    <i></i><i></i><i></i><i></i><i></i>
-                  </div>
-                  <div class="data-node data-node--output" aria-hidden="true">XML</div>
-                </div>
-              }
-              @case ('admin') {
-                <div
-                  class="project-illustration project-illustration--admin"
-                  role="img"
-                  [attr.aria-label]="project.visualLabel"
-                >
-                  <div class="admin-panel" aria-hidden="true">
-                    <div class="admin-panel__rail"><i></i><i></i><i></i><i></i></div>
-                    <div class="admin-panel__body">
-                      <div class="admin-panel__toolbar"><i></i><i></i></div>
-                      <div class="admin-panel__summary"><i></i><i></i><i></i></div>
-                      <div class="admin-panel__rows"><i></i><i></i><i></i></div>
-                    </div>
-                  </div>
-                </div>
-              }
-            }
-          </div>
+    <div class="projects-carousel">
+      <button
+        type="button"
+        class="projects-carousel__arrow projects-carousel__arrow--previous"
+        [attr.aria-label]="content().projectCarousel.previous"
+        [disabled]="activeIndex() === 0"
+        (click)="showProject(activeIndex() - 1)"
+      >
+        <span aria-hidden="true">&larr;</span>
+      </button>
 
-          <div class="projects-section__content">
-            <div class="projects-section__meta">
-              <span class="projects-section__number" aria-hidden="true">{{ project.number }}</span>
-              <span class="projects-section__category">{{ project.category }}</span>
-            </div>
-            <h3>{{ project.title }}</h3>
-            <p class="projects-section__role">{{ project.role }}</p>
-            <p class="projects-section__description">{{ project.description }}</p>
+      <div
+        #carouselViewport
+        class="projects-carousel__viewport"
+        (scroll)="onTrackScroll()"
+      >
+        <div class="projects-carousel__track">
+          @for (project of data().projects; track project.number; let index = $index; let first = $first) {
+            <article
+              #projectSlide
+              class="projects-section__item glass-panel"
+              role="group"
+              [class.projects-section__item--featured]="first"
+              [attr.aria-roledescription]="content().projectCarousel.slideDescription"
+              [attr.aria-label]="
+                content().projectCarousel.project +
+                ' ' +
+                (index + 1) +
+                ' ' +
+                content().projectCarousel.of +
+                ' ' +
+                data().projects.length
+              "
+              [attr.aria-hidden]="activeIndex() === index ? null : 'true'"
+              [attr.inert]="activeIndex() === index ? null : ''"
+            >
+              <app-project-visual [project]="project" />
 
-            @if (project.technologies.length > 0) {
-              <ul class="projects-section__technologies">
-                @for (technology of project.technologies.slice(0, 4); track technology) {
-                  <li>{{ technology }}</li>
-                }
-                @if (project.technologies.length > 4) {
-                  <li
-                    class="projects-section__technology-count"
-                    [attr.aria-label]="project.additionalTechnologyLabel"
-                  >
-                    +{{ project.technologies.length - 4 }}
-                  </li>
-                }
-              </ul>
-            }
+              <div class="projects-section__content">
+                <div class="projects-section__meta">
+                  <span class="projects-section__number" aria-hidden="true">{{ project.number }}</span>
+                  <span class="projects-section__category">{{ project.category }}</span>
+                </div>
+                <h3>{{ project.title }}</h3>
+                <p class="projects-section__role">{{ project.role }}</p>
+                <p class="projects-section__description">{{ project.description }}</p>
 
-            @if (project.liveUrl || project.repositoryUrl) {
-              <div class="projects-section__actions">
-                @if (project.liveUrl) {
-                  <a
-                    class="projects-section__action projects-section__action--primary"
-                    [href]="project.liveUrl"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    [attr.aria-label]="content().links.liveSite + ': ' + project.title"
-                  >
-                    {{ content().links.liveSite }}
-                  </a>
+                @if (project.technologies.length > 0) {
+                  <ul class="projects-section__technologies">
+                    @for (technology of project.technologies.slice(0, 4); track technology) {
+                      <li>{{ technology }}</li>
+                    }
+                    @if (project.technologies.length > 4) {
+                      <li
+                        class="projects-section__technology-count"
+                        [attr.aria-label]="project.additionalTechnologyLabel"
+                      >
+                        +{{ project.technologies.length - 4 }}
+                      </li>
+                    }
+                  </ul>
                 }
-                @if (project.repositoryUrl) {
-                  <a
-                    class="projects-section__action projects-section__action--secondary"
-                    [href]="project.repositoryUrl"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    [attr.aria-label]="content().links.repository + ': ' + project.title"
-                  >
-                    {{ content().links.repository }}
-                  </a>
+
+                @if (project.liveUrl || project.repositoryUrl) {
+                  <div class="projects-section__actions">
+                    @if (project.liveUrl) {
+                      <a
+                        class="projects-section__action projects-section__action--primary"
+                        [href]="project.liveUrl"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        [attr.aria-label]="content().links.liveSite + ': ' + project.title"
+                      >
+                        {{ content().links.liveSite }}
+                      </a>
+                    }
+                    @if (project.repositoryUrl) {
+                      <a
+                        class="projects-section__action projects-section__action--secondary"
+                        [href]="project.repositoryUrl"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        [attr.aria-label]="content().links.repository + ': ' + project.title"
+                      >
+                        {{ content().links.repository }}
+                      </a>
+                    }
+                  </div>
                 }
               </div>
-            }
-          </div>
-        </article>
-      }
+            </article>
+          }
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="projects-carousel__arrow projects-carousel__arrow--next"
+        [attr.aria-label]="content().projectCarousel.next"
+        [disabled]="activeIndex() === data().projects.length - 1"
+        (click)="showProject(activeIndex() + 1)"
+      >
+        <span aria-hidden="true">&rarr;</span>
+      </button>
+
+      <div class="projects-carousel__status">
+        <span
+          class="projects-carousel__counter"
+          aria-live="polite"
+          [attr.aria-label]="
+            content().projectCarousel.project +
+            ' ' +
+            (activeIndex() + 1) +
+            ' ' +
+            content().projectCarousel.of +
+            ' ' +
+            data().projects.length
+          "
+        >
+          {{ formatNumber(activeIndex()) }} / {{ formatNumber(data().projects.length - 1) }}
+        </span>
+        <div class="projects-carousel__indicators">
+          @for (project of data().projects; track project.number; let index = $index) {
+            <button
+              type="button"
+              class="projects-carousel__indicator"
+              [class.projects-carousel__indicator--active]="activeIndex() === index"
+              [attr.aria-label]="content().projectCarousel.showProject + ' ' + (index + 1)"
+              [attr.aria-pressed]="activeIndex() === index"
+              (click)="showProject(index)"
+            ></button>
+          }
+        </div>
+      </div>
     </div>
   }
 </section>

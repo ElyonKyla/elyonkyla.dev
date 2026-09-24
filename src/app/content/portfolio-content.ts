@@ -30,6 +30,17 @@ export interface LanguageSwitcherLabels {
   readonly switchToSpanish: string;
 }
 
+export interface ProjectCarouselLabels {
+  readonly regionLabel: string;
+  readonly carouselDescription: string;
+  readonly slideDescription: string;
+  readonly project: string;
+  readonly of: string;
+  readonly previous: string;
+  readonly next: string;
+  readonly showProject: string;
+}
+
 export interface PortfolioContent {
   readonly documentTitle: string;
   readonly skipLink: string;
@@ -45,6 +56,7 @@ export interface PortfolioContent {
   readonly sectionTitles: Record<SectionId, string>;
   readonly links: LinkLabels;
   readonly languageSwitcher: LanguageSwitcherLabels;
+  readonly projectCarousel: ProjectCarouselLabels;
 }
 
 export interface ExperienceItem {
@@ -166,6 +178,16 @@ export const portfolioContent: Record<LanguageCode, PortfolioContent> = {
       switchToEnglish: 'Switch to English',
       switchToSpanish: 'Switch to Spanish',
     },
+    projectCarousel: {
+      regionLabel: 'Featured projects carousel',
+      carouselDescription: 'carousel',
+      slideDescription: 'slide',
+      project: 'Project',
+      of: 'of',
+      previous: 'Previous project',
+      next: 'Next project',
+      showProject: 'Show project',
+    },
   },
   es: {
     documentTitle: 'Tania Veiga | Desarrolladora Backend',
@@ -205,6 +227,16 @@ export const portfolioContent: Record<LanguageCode, PortfolioContent> = {
       label: 'Selector de idioma',
       switchToEnglish: 'Cambiar a inglés',
       switchToSpanish: 'Cambiar a español',
+    },
+    projectCarousel: {
+      regionLabel: 'Carrusel de proyectos destacados',
+      carouselDescription: 'carrusel',
+      slideDescription: 'diapositiva',
+      project: 'Proyecto',
+      of: 'de',
+      previous: 'Proyecto anterior',
+      next: 'Proyecto siguiente',
+      showProject: 'Mostrar proyecto',
     },
   },
 };

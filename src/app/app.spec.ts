@@ -197,6 +197,115 @@ describe('App', () => {
     expect(projectsSection.textContent).toContain('Full-Stack Developer & Web Architect');
   });
 
+  it('should initialize the project carousel on the first project', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const slides = compiled.querySelectorAll<HTMLElement>('.projects-section__item');
+    const previousButton = compiled.querySelector(
+      '.projects-carousel__arrow--previous',
+    ) as HTMLButtonElement;
+
+    expect(previousButton.disabled).toBe(true);
+    expect(slides[0].hasAttribute('aria-hidden')).toBe(false);
+    expect(slides[1].getAttribute('aria-hidden')).toBe('true');
+    expect(compiled.querySelector('.projects-carousel__counter')?.textContent).toContain('01 / 03');
+  });
+
+  it('should advance the project carousel one project at a time', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const nextButton = compiled.querySelector(
+      '.projects-carousel__arrow--next',
+    ) as HTMLButtonElement;
+
+    nextButton.click();
+    fixture.detectChanges();
+
+    const slides = compiled.querySelectorAll<HTMLElement>('.projects-section__item');
+    expect(slides[0].getAttribute('aria-hidden')).toBe('true');
+    expect(slides[1].hasAttribute('aria-hidden')).toBe(false);
+    expect(compiled.querySelector('.projects-carousel__counter')?.textContent).toContain('02 / 03');
+  });
+
+  it('should disable the next control on the final project', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const nextButton = compiled.querySelector(
+      '.projects-carousel__arrow--next',
+    ) as HTMLButtonElement;
+
+    nextButton.click();
+    fixture.detectChanges();
+    nextButton.click();
+    fixture.detectChanges();
+
+    expect(nextButton.disabled).toBe(true);
+    expect(compiled.querySelector('.projects-carousel__counter')?.textContent).toContain('03 / 03');
+  });
+
+  it('should select a project directly from its indicator', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const indicators = compiled.querySelectorAll<HTMLButtonElement>(
+      '.projects-carousel__indicator',
+    );
+
+    indicators[2].click();
+    fixture.detectChanges();
+
+    expect(indicators[2].getAttribute('aria-pressed')).toBe('true');
+    expect(compiled.querySelector('.projects-carousel__counter')?.textContent).toContain('03 / 03');
+  });
+
+  it('should preserve the selected project and localize carousel labels', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const projectsSection = compiled.querySelector('section#projects') as HTMLElement;
+    const indicators = compiled.querySelectorAll<HTMLButtonElement>(
+      '.projects-carousel__indicator',
+    );
+
+    indicators[1].click();
+    fixture.detectChanges();
+    expect(projectsSection.getAttribute('aria-label')).toBe('Featured projects carousel');
+    expect(projectsSection.querySelector('article')?.getAttribute('aria-label')).toBe(
+      'Project 1 of 3',
+    );
+    expect(indicators[1].getAttribute('aria-label')).toBe('Show project 2');
+
+    const spanishButton = compiled.querySelector(
+      'button[aria-label="Switch to Spanish"]',
+    ) as HTMLButtonElement;
+    spanishButton.click();
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    expect(projectsSection.getAttribute('aria-label')).toBe('Carrusel de proyectos destacados');
+    expect(projectsSection.querySelectorAll('article')[1].getAttribute('aria-label')).toBe(
+      'Proyecto 2 de 3',
+    );
+    expect(indicators[1].getAttribute('aria-label')).toBe('Mostrar proyecto 2');
+    expect(indicators[1].getAttribute('aria-pressed')).toBe('true');
+    expect(compiled.querySelector('.projects-carousel__counter')?.textContent).toContain('02 / 03');
+  });
+
+  it('should support arrow-key navigation in the project carousel', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const projectsSection = compiled.querySelector('section#projects') as HTMLElement;
+
+    projectsSection.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, key: 'ArrowRight' }));
+    fixture.detectChanges();
+
+    expect(compiled.querySelector('.projects-carousel__counter')?.textContent).toContain('02 / 03');
+  });
+
   it('should render FastAPI in the skills section in both languages', async () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
