@@ -1,0 +1,17 @@
+<figure class="architecture">
+  <div class="architecture__node">
+    <span>Frontend</span>
+    <strong>{{ content().architectureFrontend }}</strong>
+    <small>{{ content().architectureDeployment }}</small>
+  </div>
+  <div class="architecture__connection" aria-hidden="true">
+    <span>{{ content().architectureFlow }}</span>
+    <i></i>
+  </div>
+  <div class="architecture__node">
+    <span>Backend</span>
+    <strong>{{ content().architectureCms }}</strong>
+    <small>{{ content().architectureHosting }}</small>
+  </div>
+  <figcaption>{{ content().architectureDescription }}</figcaption>
+</figure>

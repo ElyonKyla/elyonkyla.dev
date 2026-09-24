@@ -1,5 +1,7 @@
 import { TestBed } from '@angular/core/testing';
+import { provideRouter, Router } from '@angular/router';
 import { App } from './app';
+import { routes } from './app.routes';
 
 function sectionText(compiled: HTMLElement, sectionId: string): string {
   return compiled.querySelector(`section#${sectionId}`)?.textContent ?? '';
@@ -21,6 +23,7 @@ describe('App', () => {
 
     await TestBed.configureTestingModule({
       imports: [App],
+      providers: [provideRouter(routes)],
     }).compileComponents();
   });
 
@@ -166,6 +169,16 @@ describe('App', () => {
     expect(projectsText).toContain('Digital Tachograph Data Processing');
     expect(projectsText).toContain('Python Admin Web');
     expect(projectsText).toContain('Full-Stack Developer & Web Architect');
+    const caseStudyLinks = projectsSection.querySelectorAll<HTMLAnchorElement>(
+      'a[href="/projects/taller-cars-listanco"]',
+    );
+    expect(caseStudyLinks.length).toBe(1);
+    expect(caseStudyLinks[0].textContent).toContain('View case study');
+    expect(caseStudyLinks[0].target).toBe('');
+    expect(
+      projectsSection.querySelector<HTMLAnchorElement>('a[href="https://tallercarslistanco.es/"]')
+        ?.rel,
+    ).toContain('noopener');
     expect(
       projectsSection.querySelector('.projects-section__technology-count')?.getAttribute('aria-label'),
     ).toBe('1 additional technology: Railway');
@@ -182,6 +195,7 @@ describe('App', () => {
     expect(projectsSection.textContent).toContain('Procesamiento de datos de tacógrafos digitales');
     expect(projectsSection.textContent).toContain('Desarrolladora Full-Stack y Arquitecta Web');
     expect(projectsSection.textContent).toContain('Desarrolladora Python');
+    expect(caseStudyLinks[0].textContent).toContain('Ver detalle');
     expect(
       projectsSection.querySelector('.projects-section__technology-count')?.getAttribute('aria-label'),
     ).toBe('1 tecnología adicional: Railway');
@@ -195,6 +209,159 @@ describe('App', () => {
 
     expect(projectsSection.textContent).toContain('Taller & Cars Listanco');
     expect(projectsSection.textContent).toContain('Full-Stack Developer & Web Architect');
+  });
+
+  it('should render and localize the Taller & Cars Listanco case study', async () => {
+    const router = TestBed.inject(Router);
+    await router.navigateByUrl('/projects/taller-cars-listanco');
+
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const caseStudy = compiled.querySelector('.case-study') as HTMLElement;
+
+    expect(caseStudy).toBeTruthy();
+    expect(compiled.querySelector('app-projects-section')).toBeNull();
+    expect(caseStudy.textContent).toContain('Delivered · In production');
+    expect(caseStudy.textContent).toContain('Inventory API');
+    expect(caseStudy.querySelector('img')?.getAttribute('src')).toBe(
+      '/images/projects/taller-cars-listanco.webp',
+    );
+
+    const externalLinks = caseStudy.querySelectorAll<HTMLAnchorElement>('a[target="_blank"]');
+    expect(externalLinks.length).toBe(2);
+    expect([...externalLinks].every((link) => link.rel.includes('noopener'))).toBe(true);
+    expect(
+      caseStudy.querySelector<HTMLAnchorElement>(
+        'a[href="https://github.com/ElyonKyla/compraventa-coches"]',
+      ),
+    ).toBeTruthy();
+
+    const spanishButton = compiled.querySelector(
+      'button[aria-label="Switch to Spanish"]',
+    ) as HTMLButtonElement;
+    spanishButton.click();
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    expect(caseStudy.textContent).toContain('Entregado · En producción');
+    expect(caseStudy.textContent).toContain('API de inventario');
+    expect(caseStudy.textContent).toContain('Volver a proyectos');
+  });
+
+  it('should navigate every case-study header link back to its landing section', async () => {
+    const router = TestBed.inject(Router);
+    const fixture = TestBed.createComponent(App);
+    const compiled = fixture.nativeElement as HTMLElement;
+    const sectionIds = [
+      'home',
+      'about',
+      'experience',
+      'projects',
+      'skills',
+      'education',
+      'training',
+      'certifications',
+      'contact',
+    ];
+
+    for (const sectionId of sectionIds) {
+      await router.navigateByUrl('/projects/taller-cars-listanco');
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      const link = compiled.querySelector<HTMLAnchorElement>(
+        `.site-header__nav a[href="/#${sectionId}"]`,
+      );
+      expect(link, `missing header link for ${sectionId}`).toBeTruthy();
+
+      link?.click();
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      expect(router.url).toBe(`/#${sectionId}`);
+      expect(compiled.querySelector(`section#${sectionId}`)).toBeTruthy();
+    }
+  });
+
+  it('should preserve the landing header fragment links', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const links = compiled.querySelectorAll<HTMLAnchorElement>(
+      '.site-header__nav .site-header__link',
+    );
+
+    expect([...links].map((link) => link.getAttribute('href'))).toEqual([
+      '#home',
+      '#about',
+      '#experience',
+      '#projects',
+      '#skills',
+      '#education',
+      '#training',
+      '#certifications',
+      '#contact',
+    ]);
+  });
+
+  it('should localize case-study metadata and restore landing metadata', async () => {
+    const router = TestBed.inject(Router);
+    await router.navigateByUrl('/projects/taller-cars-listanco');
+
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    const canonical = () => document.head.querySelectorAll<HTMLLinkElement>('link[rel="canonical"]');
+    const metaContent = (selector: string) =>
+      document.head.querySelector<HTMLMetaElement>(selector)?.content ?? null;
+
+    expect(document.title).toBe('Taller & Cars Listanco | Project by Tania Veiga');
+    expect(metaContent('meta[name="description"]')).toBe(
+      'Case study of the website and inventory system developed for Taller & Cars Listanco using Angular, Directus, Netlify and Railway.',
+    );
+    expect(metaContent('meta[property="og:title"]')).toBe(document.title);
+    expect(metaContent('meta[property="og:description"]')).toBe(
+      metaContent('meta[name="description"]'),
+    );
+    expect(metaContent('meta[property="og:url"]')).toBe(
+      'https://taniaveiga-dev.netlify.app/projects/taller-cars-listanco',
+    );
+    expect(canonical().length).toBe(1);
+    expect(canonical()[0].href).toBe(
+      'https://taniaveiga-dev.netlify.app/projects/taller-cars-listanco',
+    );
+
+    const spanishButton = compiled.querySelector(
+      'button[aria-label="Switch to Spanish"]',
+    ) as HTMLButtonElement;
+    spanishButton.click();
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    expect(document.title).toBe('Taller & Cars Listanco | Proyecto de Tania Veiga');
+    expect(metaContent('meta[name="description"]')).toBe(
+      'Caso de estudio del sitio web y sistema de inventario desarrollado para Taller & Cars Listanco con Angular, Directus, Netlify y Railway.',
+    );
+    expect(metaContent('meta[property="og:title"]')).toBe(document.title);
+    expect(metaContent('meta[property="og:description"]')).toBe(
+      metaContent('meta[name="description"]'),
+    );
+    expect(canonical().length).toBe(1);
+
+    await router.navigateByUrl('/');
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    expect(document.title).toBe('Tania Veiga | Desarrolladora Backend');
+    expect(canonical().length).toBe(0);
+    expect(metaContent('meta[name="description"]')).toBeNull();
+    expect(metaContent('meta[property="og:title"]')).toBeNull();
+    expect(metaContent('meta[property="og:description"]')).toBeNull();
+    expect(metaContent('meta[property="og:url"]')).toBeNull();
   });
 
   it('should initialize the project carousel on the first project', async () => {

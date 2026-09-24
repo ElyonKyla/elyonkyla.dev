@@ -78,6 +78,14 @@
 
                 @if (project.liveUrl || project.repositoryUrl) {
                   <div class="projects-section__actions">
+                    @if (first) {
+                      <a
+                        class="projects-section__action projects-section__action--secondary"
+                        routerLink="/projects/taller-cars-listanco"
+                      >
+                        {{ content().links.caseStudy }}
+                      </a>
+                    }
                     @if (project.liveUrl) {
                       <a
                         class="projects-section__action projects-section__action--primary"

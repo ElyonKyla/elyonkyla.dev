@@ -1,0 +1,90 @@
+.architecture {
+  align-items: center;
+  display: grid;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  grid-template-columns: 1fr minmax(5rem, 0.5fr) 1fr;
+  margin: 2rem 0 0;
+}
+
+.architecture__node {
+  background: rgba(2, 7, 18, 0.58);
+  border: 1px solid rgba(79, 216, 255, 0.3);
+  border-radius: 1rem;
+  display: grid;
+  gap: 0.35rem;
+  min-height: 9rem;
+  padding: 1.25rem;
+  place-content: center;
+  text-align: center;
+}
+
+.architecture__node span,
+.architecture__connection span {
+  color: var(--color-cyan);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.architecture__node strong {
+  font-size: 1.15rem;
+}
+
+.architecture__node small {
+  color: var(--color-text-muted);
+}
+
+.architecture__connection {
+  display: grid;
+  gap: 0.55rem;
+  text-align: center;
+}
+
+.architecture__connection i {
+  background: var(--color-cyan);
+  height: 1px;
+  position: relative;
+}
+
+.architecture__connection i::after {
+  border-right: 1px solid var(--color-cyan);
+  border-top: 1px solid var(--color-cyan);
+  content: '';
+  height: 0.55rem;
+  position: absolute;
+  right: 0;
+  top: -0.28rem;
+  transform: rotate(45deg);
+  width: 0.55rem;
+}
+
+figcaption {
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+}
+
+@media (max-width: 520px) {
+  .architecture {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .architecture__connection i {
+    height: 2.5rem;
+    justify-self: center;
+    width: 1px;
+  }
+
+  .architecture__connection i::after {
+    border-bottom: 1px solid var(--color-cyan);
+    border-right: 1px solid var(--color-cyan);
+    border-top: 0;
+    bottom: 0;
+    left: -0.28rem;
+    right: auto;
+    top: auto;
+  }
+}

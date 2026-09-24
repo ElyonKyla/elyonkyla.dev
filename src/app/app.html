@@ -4,17 +4,24 @@
 
 <app-site-header />
 
-<main id="main-content" class="app-main" tabindex="-1">
-  <app-hero-section />
-  <app-about-section />
-  <app-experience-section />
-  <app-projects-section />
-  <app-skills-section />
-  <app-education-section />
-  <app-training-section />
-  <app-certifications-section />
-</main>
+@if (!hasActiveRoute()) {
+  <main id="main-content" class="app-main" tabindex="-1">
+    <app-hero-section />
+    <app-about-section />
+    <app-experience-section />
+    <app-projects-section />
+    <app-skills-section />
+    <app-education-section />
+    <app-training-section />
+    <app-certifications-section />
+  </main>
 
-<footer class="app-footer">
-  <app-contact-section />
-</footer>
+  <footer class="app-footer">
+    <app-contact-section />
+  </footer>
+}
+
+<router-outlet
+  (activate)="hasActiveRoute.set(true)"
+  (deactivate)="hasActiveRoute.set(false)"
+/>

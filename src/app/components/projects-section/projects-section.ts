@@ -9,11 +9,12 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { LanguageService } from '../../services/language.service';
 import { ProjectVisual } from './project-visual';
 
 @Component({
-  imports: [ProjectVisual],
+  imports: [ProjectVisual, RouterLink],
   selector: 'app-projects-section',
   styleUrl: './projects-section.scss',
   templateUrl: './projects-section.html',

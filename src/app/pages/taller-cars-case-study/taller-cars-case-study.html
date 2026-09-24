@@ -1,0 +1,103 @@
+<main id="main-content" class="case-study" tabindex="-1">
+  <a class="case-study__back" routerLink="/" fragment="projects">
+    <span aria-hidden="true">&larr;</span> {{ content().back }}
+  </a>
+
+  <article>
+    <header class="case-study__hero glass-panel">
+      <div class="case-study__intro">
+        <div class="case-study__meta">
+          <span>{{ content().category }}</span>
+          <span class="case-study__status">{{ content().status }}</span>
+        </div>
+        <h1>{{ content().title }}</h1>
+        <p class="case-study__role">{{ content().role }}</p>
+        <p class="case-study__summary">{{ content().summary }}</p>
+      </div>
+
+      <div class="case-study__browser">
+        <div class="case-study__browser-bar" aria-hidden="true">
+          <span><i></i><i></i><i></i></span>
+          <span>tallercarslistanco.es</span>
+        </div>
+        <img
+          src="/images/projects/taller-cars-listanco.webp"
+          [alt]="content().imageAlt"
+          width="1440"
+          height="900"
+        />
+      </div>
+    </header>
+
+    <div class="case-study__grid">
+      <section class="case-study__panel glass-panel">
+        <span class="case-study__number" aria-hidden="true">01</span>
+        <h2>{{ content().objectiveTitle }}</h2>
+        <p>{{ content().objective }}</p>
+      </section>
+      <section class="case-study__panel glass-panel">
+        <span class="case-study__number" aria-hidden="true">02</span>
+        <h2>{{ content().solutionTitle }}</h2>
+        <p>{{ content().solution }}</p>
+      </section>
+    </div>
+
+    <section class="case-study__section glass-panel">
+      <h2>{{ content().featuresTitle }}</h2>
+      <ul class="case-study__features">
+        @for (feature of content().features; track $index) {
+          <li>{{ feature }}</li>
+        }
+      </ul>
+    </section>
+
+    <section class="case-study__section glass-panel">
+      <h2>{{ content().architectureTitle }}</h2>
+      <p>{{ content().architectureDescription }}</p>
+      <app-case-study-architecture [content]="content()" />
+    </section>
+
+    <div class="case-study__grid">
+      <section class="case-study__panel glass-panel">
+        <h2>{{ content().seoTitle }}</h2>
+        <p>{{ content().seo }}</p>
+      </section>
+      <section class="case-study__panel glass-panel">
+        <h2>{{ content().workTitle }}</h2>
+        <p>{{ content().work }}</p>
+      </section>
+    </div>
+
+    <footer class="case-study__footer glass-panel">
+      <div>
+        <h2>{{ content().technologiesTitle }}</h2>
+        <ul class="case-study__technologies">
+          @for (technology of technologies; track technology) {
+            <li>{{ technology }}</li>
+          }
+        </ul>
+      </div>
+      <div>
+        <h2>{{ content().linksTitle }}</h2>
+        <div class="case-study__actions">
+          <a
+            class="case-study__action case-study__action--primary"
+            href="https://tallercarslistanco.es/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {{ content().liveSite }}
+          </a>
+          <a
+            class="case-study__action"
+            href="https://github.com/ElyonKyla/compraventa-coches"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {{ content().repository }}
+          </a>
+        </div>
+      </div>
+    </footer>
+  </article>
+</main>

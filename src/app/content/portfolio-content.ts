@@ -22,6 +22,7 @@ export interface LinkLabels {
   readonly email: string;
   readonly repository: string;
   readonly liveSite: string;
+  readonly caseStudy: string;
 }
 
 export interface LanguageSwitcherLabels {
@@ -172,6 +173,7 @@ export const portfolioContent: Record<LanguageCode, PortfolioContent> = {
       email: 'Contact by email',
       repository: 'GitHub',
       liveSite: 'View live site',
+      caseStudy: 'View case study',
     },
     languageSwitcher: {
       label: 'Language selector',
@@ -222,6 +224,7 @@ export const portfolioContent: Record<LanguageCode, PortfolioContent> = {
       email: 'Contactar por email',
       repository: 'GitHub',
       liveSite: 'Visitar web',
+      caseStudy: 'Ver detalle',
     },
     languageSwitcher: {
       label: 'Selector de idioma',

@@ -1,4 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { AboutSection } from './components/about-section/about-section';
 import { CertificationsSection } from './components/certifications-section/certifications-section';
 import { ContactSection } from './components/contact-section/contact-section';
@@ -23,6 +24,7 @@ import { LanguageService } from './services/language.service';
     TrainingSection,
     CertificationsSection,
     ContactSection,
+    RouterOutlet,
   ],
   selector: 'app-root',
   styleUrl: './app.scss',
@@ -30,4 +32,5 @@ import { LanguageService } from './services/language.service';
 })
 export class App {
   protected readonly content = inject(LanguageService).content;
+  protected readonly hasActiveRoute = signal(false);
 }

@@ -1,11 +1,21 @@
 <header class="site-header">
-  <a class="site-header__brand" href="#home" [attr.aria-label]="content().name">
-    {{ content().name }}
-  </a>
+  @if (isCaseStudy()) {
+    <a class="site-header__brand" routerLink="/" fragment="home" [attr.aria-label]="content().name">
+      {{ content().name }}
+    </a>
+  } @else {
+    <a class="site-header__brand" href="#home" [attr.aria-label]="content().name">
+      {{ content().name }}
+    </a>
+  }
 
   <nav class="site-header__nav" [attr.aria-label]="content().navigationLabel">
     @for (item of content().navigation; track item.id) {
-      <a class="site-header__link" [href]="'#' + item.id">{{ item.label }}</a>
+      @if (isCaseStudy()) {
+        <a class="site-header__link" routerLink="/" [fragment]="item.id">{{ item.label }}</a>
+      } @else {
+        <a class="site-header__link" [href]="'#' + item.id">{{ item.label }}</a>
+      }
     }
   </nav>
 
